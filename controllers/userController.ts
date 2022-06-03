@@ -37,5 +37,17 @@ class UserController{
             response.send(`User" ${user} Failed to Update`)
         }
     }
+    deleteUser =async (request:express.Request,response:express.Response) => {
+        const data = request.body;
+        const username = data.username;
+        const password = data.password;
+        const user = await this.user.userModel.deleteOne({username:username,password:password})
+        if(user.deletedCount==1){
+            response.send(`${username}Deleted`)
+        }else{
+            response.send("User Not Found...")
+        }
+        
+    }
 }
 export default UserController

@@ -6,6 +6,7 @@ const controller = new UserController();
 userRoutes.get('/getUser',controller.getAllUsers)
 userRoutes.post('/createUser',controller.createUser)
 userRoutes.put('/updateUser',controller.updateUser)
+userRoutes.delete('/deleteUser',controller.deleteUser)
 class routes{
     routes = userRoutes
 }
