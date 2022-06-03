@@ -7,6 +7,7 @@ class UserController{
 		const users = await this.user.userModel.find({})
     console.log(users)
     response.send(users)
+    // response.render('pages/home',{message:users})
 	}
     createUser = async(request:express.Request,response:express.Response)=>{
         const data = request.body;

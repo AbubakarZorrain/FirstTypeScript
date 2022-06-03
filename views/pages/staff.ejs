@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <script type="text/javascript" lang="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        data = [
+            {
+                "name": "Tiger Nixon",
+                "position": "System Architect",
+                "salary": "$3,120",
+                "start_date": "2011/04/25",
+                "office": "Edinburgh",
+                "extn": "5421"
+            },
+            {
+                "name": "Garrett Winters",
+                "position": "Director",
+                "salary": "$5,300",
+                "start_date": "2011/07/25",
+                "office": "Edinburgh",
+                "extn": "8422"
+            }
+        ]
+
+        $(document).ready(function () {
+            var optVal = 10
+            var pageNo = 1
+            $("select").change(function () {
+                alert("The text has been changed.");
+            });
+            $(document.body).on('change', "select", function (e) {
+                //doStuff
+                var optVal = $("select option:selected").val();
+                console.log(optVal)
+                window.location="http://localhost:3000/user/row"
+            });
+                $.get(`http://localhost:3000/user/getuser?pageNo=1&size=${optVal}`, function (res, status) {
+                    console.log(res)
+
+                    $('#example').DataTable({
+                        data: res.message,
+                        columns: [
+
+                            { data: '_id' },
+                            { data: 'username' },
+                            { data: 'password' }
+
+                        ]
+                    });
+                });
+       
+        });
+    </script>
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Staff Registration Page !</h1>
+    <form action="\user/register" method="POST">
+        <input type="text" name="first_name" id="abc">
+        <input type="text" name="last_name">
+        <input type="submit">
+
+
+        <h1 class="err-msg"></h1>
+
+        <!-- <%= message %> -->
+    </form>
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <td>ID</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+
+        </thead>
+    </table>
+
+</body>
+
+</html>
